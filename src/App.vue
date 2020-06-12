@@ -1,28 +1,50 @@
+<style>
+
+  body { 
+    width: 100%;
+    height: 100%;
+  }
+
+  #app {
+    width: 100%;
+    height: 100vh;
+  }
+
+</style>
+
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div>
+      {{getItem}}
+      <button @click="ADDLIST(4)">추가</button>
+    </div>
+    <home>
+    </home>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  import { mapGetters, mapMutations } from 'vuex';
+
+  import home from './components/home.vue'
+
+  export default {
+    name: 'App',
+
+    computed: {
+      ...mapGetters(['getItem'])
+    },
+
+    methods: {
+      ...mapMutations(["ADDLIST"])
+    },
+
+    components: {
+      "home": home 
+    }
   }
-}
+
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+
