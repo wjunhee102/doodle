@@ -28,13 +28,15 @@ const store = new Vuex.Store({
     getItem: state => {
       return state.count
     },
+    
     getAddress: state => {
       return state.account.email
     },
+
     getLogin: state => type => {
       const  {email, password} = state.account;
-      const  {cEmail, cPw} = type
-      if(email === cEmail && password === cPw) {
+      console.log(state, type)
+      if(email === type.email && password === type.password) {
         return true
       } else {
         return false
@@ -51,7 +53,7 @@ const store = new Vuex.Store({
     },
 
     [SIGNUP]  : function (state, payload) {
-      state = payload
+      state.account = payload
     } 
     
 
