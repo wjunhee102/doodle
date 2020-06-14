@@ -15,19 +15,18 @@
 <template>
   <div id="app">
     <div>
-      {{getItem}}
-      <button @click="ADDLIST(4)">추가</button>
+      <h1>안녕하세요 아이디를 입력해주세요~~</h1>
+      <router-link to="/signUp">회원가입</router-link>
+      <router-link to="/signIn">로그인</router-link>
+      <router-view></router-view>
     </div>
-    <home>
-    </home>
+
   </div>
 </template>
 
 <script>
 
   import { mapGetters, mapMutations } from 'vuex';
-
-  import home from './components/home.vue'
 
   export default {
     name: 'App',
@@ -40,9 +39,6 @@
       ...mapMutations(["ADDLIST"])
     },
 
-    components: {
-      "home": home 
-    }
   }
 
 </script>

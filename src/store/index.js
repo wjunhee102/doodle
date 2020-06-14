@@ -60,7 +60,10 @@ const store = new Vuex.Store({
   },
 
   actions: {
-
+    async accountSave (context) {
+      const data = await context.commit(SIGNUP) 
+      return localStorage("data",JSON.stringify(data)) ;
+    }
   }
 
 })

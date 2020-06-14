@@ -5,7 +5,7 @@
 <template>
   <div class="hello">
     <div class="top">
-      <h1>계정 만들기{{getLogin({email, password})? "성공" : "실패"}}</h1>
+      <h1>계정 만들기</h1>
     </div>
 
     <div>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-  import { mapMutations, mapGetters } from 'vuex';
+  import { mapMutations } from 'vuex';
 
   export default {
     name: 'HelloWorld',
@@ -66,7 +66,6 @@
     },
 
     computed: {
-     ...mapGetters(['getLogin']),
 
      checking () {
        const data = {
