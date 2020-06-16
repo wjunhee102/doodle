@@ -21,8 +21,9 @@
     <a href="#">대신 현재 이메일 주소 사용</a>
 
     <div>
-      <input type="text" placeholder="비밀번호" v-model="password" />
-      <input type="text" placeholder="확인" v-model="checkPw" />
+      <input type="password" placeholder="비밀번호" v-model="password" />
+      <input type="password" placeholder="확인" v-model="checkPw" />
+      <input type="text" v-bind:value="secret" />
     </div>
     <p>문자, 숫자, 기호를 조합하여 8자 이상을 사용하세요</p>
 
@@ -54,7 +55,9 @@
         password: "",
         checkPw : "",
 
-        check : ""
+        check : "",
+
+        secret: ""
 
       }
     },
@@ -62,6 +65,15 @@
     watch: {
      email : function () {
        this.check = this.email
+     },
+     password : function () {
+       const data = [];
+       for(let i = 0; i < this.password.length; i++) {
+         data[i] = "*";
+       }
+       return this.secret = data.reduce((acc, cur)=> {
+         return acc + cur
+       })
      }
     },
 

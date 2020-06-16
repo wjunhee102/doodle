@@ -10,10 +10,10 @@
     </div>
     <div>
       <label for="pw">비밀번호:</label>
-      <input type="text" v-model="password" />
+      <input type="password" v-model="password" />
     </div>
-    <button type="button">로그인</button>
-    <p>{{getLogin({ email:account, password })? "성공" : "실패"}}</p>
+    <button type="button" @click="sign">로그인</button>
+    <p>{{sucess? "성공" : "실패"}}</p>
   </div>
 </template>
 
@@ -24,7 +24,8 @@
     data () {
       return {
         account  : "",
-        password : ""
+        password : "",
+        sucess : false
       }
     },
 
@@ -33,6 +34,12 @@
         getLogin : "getLogin"
       })
     },
+
+    methods: {
+      sign () {
+        return this.sucess = this.getLogin({email : this.account, password : this.password})
+      }
+    }
 
   }
 </script>
