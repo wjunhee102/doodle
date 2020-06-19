@@ -1,19 +1,22 @@
-<style scoped>
+<style lang="scss">
 
 </style>
 
 <template>
-  <div class="hello">
+  <div class="sign-up flex justify-center">
+    <div class="visual">
+      <img src="" alt="">
+    </div>
     <div class="top">
-      <h1>계정 만들기</h1>
+      <h1 class="text-blue-primary">계정 만들기</h1>
     </div>
 
-    <div>
-      <input type="text" placeholder="성" v-model="name.last" />
-      <input type="text" placeholder="이름" v-model="name.first" />
+    <div class="m-1">
+      <input class="m-1 bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-1 px-1 block w-full appearance-none leading-normal" type="text" placeholder="성" v-model="name.last" />
+      <input class="bg-white focus:outline-none focus:shadow-outline border border-gray-300 rounded-lg py-1 px-1 block w-full appearance-none leading-normal" type="text" placeholder="이름" v-model="name.first" />
     </div>
 
-    <div>
+    <div class="m-1">
       <input type="text" value="@gmail.com" v-model="email" />
     </div>
 

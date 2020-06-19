@@ -1,4 +1,5 @@
-<style>
+<style lang="scss">
+  @import "css/tailwind.css";
 
   body { 
     width: 100%;
@@ -16,8 +17,7 @@
   <div id="app">
     <div>
       <h1>안녕하세요 아이디를 입력해주세요~~</h1>
-      <router-link to="/signUp">회원가입</router-link>
-      <router-link to="/signIn">로그인</router-link>
+      <gnb></gnb>
       <router-view></router-view>
     </div>
 
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+  import Nav from './components/nav';
 
   import { mapGetters, mapMutations } from 'vuex';
 
@@ -38,6 +39,10 @@
     methods: {
       ...mapMutations(["ADDLIST"])
     },
+
+    components: {
+      "gnb" : Nav
+    }
 
   }
 
