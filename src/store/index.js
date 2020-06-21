@@ -1,5 +1,6 @@
 import Vue  from 'vue';
 import Vuex from 'vuex';
+// import axios from 'axios';
 
 Vue.use(Vuex);
 
@@ -60,9 +61,22 @@ const store = new Vuex.Store({
   },
 
   actions: {
-    async accountSave (context) {
-      const data = await context.commit(SIGNUP) 
-      return localStorage("data",JSON.stringify(data)) ;
+    async accountSave ({commit, state}, payload) {
+      await commit(SIGNUP, payload);
+      // console.log( "데이터" ,data, JSON.stringify(state.account))
+      // const aaa = await axios("http://localhost:8085/users")
+      // console.log(aaa);
+      return localStorage.setItem("user", JSON.stringify(state.account))
+      ;
+      // return fetch("http://localhost:8085/sign-up", {
+      //   method: 'POST',
+      //   body: JSON.stringify(state.account),
+      //   headers: {
+      //     'Content-Type' : 'application/json'
+      //   }
+      // }).then(res=> res)
+      // .then(response => console.log(JSON.stringify(response)))
+      // .catch(error => console.log('Error:', error)) ;
     }
   }
 

@@ -1,9 +1,12 @@
 <style lang="scss">
   @import "css/tailwind.css";
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
   body { 
     width: 100%;
     height: 100%;
+    font-size: 14px;
+    font-family: 'Noto Sans KR', sans-serif;
   }
 
   #app {

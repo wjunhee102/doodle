@@ -1,16 +1,36 @@
 <style lang="scss">
-  
+  .login {
+    width: 1080px;
+    margin: 0 auto;
+  }
 </style>
 
 <template>
-  <div>
+  <div class="login">
     <div>
-      <label for="id">아이디: </label>
-      <input type="text" v-model="account" />
+
+      <sign-input
+        cls="mail-adress"
+        lb="email"
+        content="계정"
+        pls="계정"
+        @change="val => account = val"
+      >
+      </sign-input>
+
     </div>
     <div>
-      <label for="pw">비밀번호:</label>
-      <input type="password" v-model="password" />
+
+      <sign-input
+        cls="pwd"
+        lb="password"
+        content="비밀번호"
+        pls="비밀번호"
+        nType="password"
+        @change="val => password = val"
+      >
+      </sign-input>
+
     </div>
     <button type="button" @click="sign">로그인</button>
     <p>{{sucess? "성공" : "실패"}}</p>
