@@ -1,6 +1,6 @@
 import Vue  from 'vue';
 import Vuex from 'vuex';
-// import axios from 'axios';
+import axios from 'axios';
 
 Vue.use(Vuex);
 
@@ -64,8 +64,8 @@ const store = new Vuex.Store({
     async accountSave ({commit, state}, payload) {
       await commit(SIGNUP, payload);
       // console.log( "데이터" ,data, JSON.stringify(state.account))
-      // const aaa = await axios("http://localhost:8085/users")
-      // console.log(aaa);
+      const aaa = await axios("http://172.23.1.62:8085/users")
+      console.log(aaa);
       return localStorage.setItem("user", JSON.stringify(state.account))
       ;
       // return fetch("http://localhost:8085/sign-up", {

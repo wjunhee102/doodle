@@ -49,7 +49,8 @@
       },
 
       nType: {
-        type: String
+        type: String,
+        default: "text"
       },
 
       err: {
