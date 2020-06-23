@@ -91,10 +91,7 @@ const store = new Vuex.Store({
     },
     
     [SIGNUPSUCESS] : function (state, payload) {
-      state.signRes = Object.assign({}, state.signRes, {
-        status : payload.res,
-        message: payload.message
-      })
+      state.signRes = payload
     },
 
     [LOGOUT] : function (state) {

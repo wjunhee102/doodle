@@ -122,7 +122,7 @@
         <div>{{secret}}</div>
         <div>{{check}}</div>
         <div class="result mt-2" v-if="res.status">
-          <p>{{res.message}}</p>
+          <p>{{res.status}}</p>
         </div>
       </div>
 
@@ -178,6 +178,11 @@
        return this.secret = data.reduce((acc, cur)=> {
          return acc + cur
        })
+     },
+
+     res : function () {
+       if(this.res.status == "error") return 
+       router.push({path: '/signIn'});
      }
     },
 
@@ -233,7 +238,6 @@
         this.inputErr = false
         
         this.accountSave(detail);
-        router.push({path: '/signIn'});
       },
 
       backHome () {
