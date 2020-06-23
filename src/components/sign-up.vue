@@ -24,7 +24,7 @@
   <div class="sign-up">
 
     <div class="visual flex-1 relative mr-2">
-      <h1 class="absolute text-blue-primary text-large font-semibold">회원 가입</h1>
+      <h1 class="absolute text-blue-primary text-large font-semibold z-10">회원 가입</h1>
       <img 
         class="w-full relative main-image" 
         src="../assets/signup.jpg" 
@@ -111,11 +111,6 @@
       
 
       <div>
-        <div>{{secret}}</div>
-        <div>{{check}}</div>
-        <div class="result" v-if="res.status">
-          <p>{{res.message}}</p>
-        </div>
         <button 
           class="bg-blue-primary text-white py-1 px-4 rounded-lg shadow-md" 
           type="button" 
@@ -123,6 +118,12 @@
         >
           확인
         </button>
+
+        <div>{{secret}}</div>
+        <div>{{check}}</div>
+        <div class="result mt-2" v-if="res.status">
+          <p>{{res.message}}</p>
+        </div>
       </div>
 
     </div>
@@ -132,7 +133,7 @@
 
 <script>
   import { mapGetters, mapMutations, mapActions } from 'vuex';
-  // import router from '../router/index';
+  import router from '../router/index';
 
   export default {
     name: 'sign-up',
@@ -157,8 +158,11 @@
 
         secret: ""
 
-
       }
+    },
+
+    created () {
+      this.backHome();
     },
 
     watch: {
@@ -180,7 +184,8 @@
     computed: {
 
       ...mapGetters({
-        res : "getSignUpRes"
+        res : "getSignRes",
+        userInfo : "getUserInfo"
       }),
 
       checking () {
@@ -199,7 +204,7 @@
     methods: {
       
       ...mapMutations({
-        pushAccountData : 'SIGNUP'
+        pushAccountData : "SIGNUP"
       }),
 
       ...mapActions({
@@ -226,18 +231,16 @@
           checkPw  : this.checkPw
         }
         this.inputErr = false
-        // console.log(detail, this.inputErr);
         
         this.accountSave(detail);
-        // router.push({path: '/signIn'});
+        router.push({path: '/signIn'});
       },
 
-      // insert (val, type, def="null") {
-      //   if(val === type) {
+      backHome () {
+         if(this.userInfo.type) router.push({path: '/'});
+      }
 
-      //   }
-      // }
-    }
+    },
 
   }
 

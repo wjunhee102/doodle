@@ -4,10 +4,21 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+//*/ mutation-types
 const ADDCOUNT     = "ADDLIST";
+
+// 회원가입
 const SIGNUP       = "SIGNUP";
-const SIGNUPSUCESS = "SIGNUPSUCESS"; 
-// const DELETECOUNT = "DELETECOUNT";
+const SIGNUPSUCESS = "SIGNUPSUCESS";
+
+// 로그인
+const LOGINRESULT    = "LOGINRESULT";
+const LOGOUT         = "LOGOUT";
+const USERINFORESET  = "USERINFORESET";
+const CURRENTUSERSAVE = "CURRENTUSERSAVE";
+
+// 회원가입, 로그인 결과값 초기화
+const RESRESET     = "RESRESET";
 
 const store = new Vuex.Store({
 
@@ -23,9 +34,18 @@ const store = new Vuex.Store({
       checkPw : ""
     },
 
-    signUpRes : {
+    signRes : {
       status : null,
       message: null 
+    },
+
+    currentUser : {
+      type : false,
+      email: "",
+      name : {
+        first : "",
+        last  : ""
+      } 
     }
     
   },
@@ -50,10 +70,13 @@ const store = new Vuex.Store({
       }
     },
 
-    getSignUpRes: state => {
-      return state.signUpRes
-    }
+    getSignRes: state => {
+      return state.signRes
+    },
 
+    getUserInfo: state => {
+      return state.currentUser
+    }
 
   },
 
@@ -68,38 +91,78 @@ const store = new Vuex.Store({
     },
     
     [SIGNUPSUCESS] : function (state, payload) {
+      state.signRes = Object.assign({}, state.signRes, {
+        status : payload.res,
+        message: payload.message
+      })
+    },
+
+    [LOGOUT] : function (state) {
+      return state.currentUser = {
+        type : false,
+        email: "",
+        name : {
+          first : "",
+          last  : ""
+        } 
+      }
+    },
+
+    [RESRESET] : function (state) {
+      state.signRes = Object.assign({},state.signRes,{
+        status : null,
+        message: null 
+      });
+    },
+    
+    [USERINFORESET] : function (state) {
+      state.currentUser = {
+        type : false,
+        email: "",
+        name : ""
+      }
+    },
+
+    [CURRENTUSERSAVE] : function (state, payload) {
+      state.currentUser = {
+        type : true,
+        email: payload.email,
+        name : payload.name
+      }
+    },
+
+    [LOGINRESULT] : function (state, payload) {
       const data = () => {
-        switch(payload.message) {
+        switch(payload.status) {
           case "sucess" :
-            return "성공적으로 생성되었습니다!"
-          case "overlap":
-            return "중복된 계정입니다."
+            return `${payload.message}님 환영합니다!`
+          case "error":
+            return "계정을 찾을 수 없습니다."
           default :
             return "알 수 없는 오류입니다."
         }
       }
-      return state.signUpRes = Object.assign({}, state.signUpRes, {
-        status : payload.res,
+
+      state.signRes = {
+        status : payload.status,
         message: data()
-      })
+      };
     }
-    
 
   },
 
   actions: {
-    async accountSave ({commit, state}, payload) {
-      await commit(SIGNUP, payload);
+    async accountSave ({commit}, payload) {
       try {
         const data = await fetch("http://localhost:8085/sign-up", {
           method: 'POST',
           mode: "cors",
-          body: JSON.stringify(state.account),
+          body: JSON.stringify(payload),
           headers: {
             'Content-Type' : 'application/json'
           }
         }).then(res => res.json());
-        
+
         console.log(data);
 
         if(!data) {
@@ -109,6 +172,32 @@ const store = new Vuex.Store({
           })
         } else {
           commit(SIGNUPSUCESS, data);
+        }
+        
+      } catch (err) {
+        console.log(err);
+      } 
+    },
+
+    async loginAction ({commit}, payload) {
+      try {
+        const data = await fetch("http://localhost:8085/sign-in", {
+          method: 'POST',
+          mode: "cors",
+          body: JSON.stringify(payload),
+          headers: {
+            'Content-Type' : 'application/json'
+          }
+        }).then(res => res.json());
+
+        console.log(data);
+
+        if(!data.email) {
+          commit(USERINFORESET);
+          commit(SIGNUPSUCESS, data);
+        } else {
+          commit(RESRESET);
+          commit(CURRENTUSERSAVE, data);
         }
         
       } catch (err) {

@@ -1,13 +1,21 @@
 import Vue       from "vue";
 import VueRouter from "vue-router";
-import signUp    from "../components/sign-up.vue";
-import signIn    from "../components/sign-in.vue";
+
+import Home      from "../components/home.vue";
+import SignUp    from "../components/sign-up.vue";
+import SignIn    from "../components/sign-in.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
-  {path: '/signUp', component : signUp },
-  {path: '/signIn', component : signIn }
+  //홈
+  {path: "/", component : Home},
+
+  //회원가입 
+  {path: "/signUp", component : SignUp },
+
+  //로그인
+  {path: "/signIn", component : SignIn }
 ]
 
 const router = new VueRouter({

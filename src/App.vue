@@ -19,8 +19,14 @@
 <template>
   <div id="app">
     <div>
-      <h1>안녕하세요 아이디를 입력해주세요~~</h1>
-      <gnb></gnb>
+      <div class="flex justify-between">
+        <gnb></gnb>
+        <div v-if="userInfo.type">
+          {{userInfo.name.first}}
+        </div>
+        <button v-if="userInfo.type" @click="logout">logout</button>
+      </div>
+      
       <router-view></router-view>
     </div>
 
@@ -36,11 +42,16 @@
     name: 'App',
 
     computed: {
-      ...mapGetters(['getItem'])
+      ...mapGetters({
+        getItem: 'getItem',
+        userInfo: 'getUserInfo'
+      })
     },
 
     methods: {
-      ...mapMutations(["ADDLIST"])
+      ...mapMutations({
+          logout : "LOGOUT"
+      })
     },
 
     components: {
