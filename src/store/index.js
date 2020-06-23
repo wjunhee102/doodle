@@ -1,11 +1,12 @@
 import Vue  from 'vue';
 import Vuex from 'vuex';
-import axios from 'axios';
+// import axios from 'axios';
 
 Vue.use(Vuex);
 
-const ADDCOUNT    = "ADDLIST";
-const SIGNUP      = "SIGNUP";
+const ADDCOUNT     = "ADDLIST";
+const SIGNUP       = "SIGNUP";
+const SIGNUPSUCESS = "SIGNUPSUCESS"; 
 // const DELETECOUNT = "DELETECOUNT";
 
 const store = new Vuex.Store({
@@ -20,6 +21,11 @@ const store = new Vuex.Store({
       },
       password: "",
       checkPw : ""
+    },
+
+    signUpRes : {
+      status : null,
+      message: null 
     }
     
   },
@@ -44,6 +50,10 @@ const store = new Vuex.Store({
       }
     },
 
+    getSignUpRes: state => {
+      return state.signUpRes
+    }
+
 
   },
 
@@ -55,7 +65,24 @@ const store = new Vuex.Store({
 
     [SIGNUP]  : function (state, payload) {
       state.account = payload
-    } 
+    },
+    
+    [SIGNUPSUCESS] : function (state, payload) {
+      const data = () => {
+        switch(payload.message) {
+          case "sucess" :
+            return "성공적으로 생성되었습니다!"
+          case "overlap":
+            return "중복된 계정입니다."
+          default :
+            return "알 수 없는 오류입니다."
+        }
+      }
+      return state.signUpRes = Object.assign({}, state.signUpRes, {
+        status : payload.res,
+        message: data()
+      })
+    }
     
 
   },
@@ -63,20 +90,30 @@ const store = new Vuex.Store({
   actions: {
     async accountSave ({commit, state}, payload) {
       await commit(SIGNUP, payload);
-      // console.log( "데이터" ,data, JSON.stringify(state.account))
-      const aaa = await axios("http://172.23.1.62:8085/users")
-      console.log(aaa);
-      return localStorage.setItem("user", JSON.stringify(state.account))
-      ;
-      // return fetch("http://localhost:8085/sign-up", {
-      //   method: 'POST',
-      //   body: JSON.stringify(state.account),
-      //   headers: {
-      //     'Content-Type' : 'application/json'
-      //   }
-      // }).then(res=> res)
-      // .then(response => console.log(JSON.stringify(response)))
-      // .catch(error => console.log('Error:', error)) ;
+      try {
+        const data = await fetch("http://localhost:8085/sign-up", {
+          method: 'POST',
+          mode: "cors",
+          body: JSON.stringify(state.account),
+          headers: {
+            'Content-Type' : 'application/json'
+          }
+        }).then(res => res.json());
+        
+        console.log(data);
+
+        if(!data) {
+          commit(SIGNUPSUCESS, {
+            status : "error",
+            message : "aa"
+          })
+        } else {
+          commit(SIGNUPSUCESS, data);
+        }
+        
+      } catch (err) {
+        console.log(err);
+      } 
     }
   }
 

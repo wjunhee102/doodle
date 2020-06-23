@@ -96,9 +96,9 @@
     },
 
     methods: {
-      valueChange (e) {
-        this.$emit("change", e.target.value)
-      },
+      // valueChange (e) {
+      //   this.$emit("change", e.target.value)
+      // },
 
       inputError () {
         if(this.err && !this.val) {

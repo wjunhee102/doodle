@@ -1,6 +1,7 @@
 <style lang="scss">
   .sign-up {
     max-width: 1080px;
+    min-width: 800px;
     margin: 0 auto;
     left: 50%;
     top: 50%;
@@ -31,8 +32,8 @@
       />
     </div>
     
-    <div class="sign flex-1">
-    
+    <div class="sign flex-1" @keyup.enter="signUp">
+     
       <h2 class="mb-6 text-large font-semibold">
         본인의 정보를 작성해주세요
       </h2>
@@ -112,6 +113,9 @@
       <div>
         <div>{{secret}}</div>
         <div>{{check}}</div>
+        <div class="result" v-if="res.status">
+          <p>{{res.message}}</p>
+        </div>
         <button 
           class="bg-blue-primary text-white py-1 px-4 rounded-lg shadow-md" 
           type="button" 
@@ -122,12 +126,13 @@
       </div>
 
     </div>
+
   </div>
 </template>
 
 <script>
-  import { mapMutations, mapActions } from 'vuex';
-  import router from '../router/index';
+  import { mapGetters, mapMutations, mapActions } from 'vuex';
+  // import router from '../router/index';
 
   export default {
     name: 'sign-up',
@@ -174,16 +179,20 @@
 
     computed: {
 
-     checking () {
-       const data = {
-         email : this.email,
-         password : this.password
-       }
-       if(this.getLogin(data)) {
-         return "성공"
-       } else {
-         return "실패"
-       }
+      ...mapGetters({
+        res : "getSignUpRes"
+      }),
+
+      checking () {
+        const data = {
+          email : this.email,
+          password : this.password
+        }
+        if(this.getLogin(data)) {
+          return "성공"
+        } else {
+          return "실패"
+        }
      }
     },  
 
@@ -202,11 +211,14 @@
       },
 
       signUp () {
+
         if(!this.email || !this.name || !this.password || !this.checkPw) {
           this.inputErr = true
           return console.log("값이 없음")
         }
-        if(this.password !== this.checkPw) return console.log("오류")
+
+        if(this.password !== this.checkPw) return console.log("오류");
+
         const detail = {
           email    : this.email,
           name     : this.name,
@@ -214,10 +226,10 @@
           checkPw  : this.checkPw
         }
         this.inputErr = false
-        console.log(detail, this.inputErr);
+        // console.log(detail, this.inputErr);
         
         this.accountSave(detail);
-        router.push({path: '/signIn'});
+        // router.push({path: '/signIn'});
       },
 
       // insert (val, type, def="null") {
