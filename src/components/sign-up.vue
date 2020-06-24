@@ -42,7 +42,7 @@
         <div class="mb-4 flex justify-between">
           <sign-input
             cls="last-name flex-1 mr-2"
-            lb="last_name"
+            label="last_name"
             content="성"
             pls="성"
             :err="inputErr"
@@ -52,7 +52,7 @@
 
           <sign-input
             cls="first-name flex-1"
-            lb="first_name"
+            label="first_name"
             content="이름"
             pls="이름"
             :err="inputErr"
@@ -66,7 +66,7 @@
 
           <sign-input
             cls="mail-adress"
-            lb="email"
+            label="email"
             content="계정"
             pls="example@gmail.com"
             :err="inputErr"
@@ -80,7 +80,7 @@
         <div class="mb-4">
           <sign-input
             cls="pwd"
-            lb="password"
+            label="password"
             content="비밀번호"
             pls="비밀번호"
             nType="password"
@@ -94,7 +94,7 @@
 
           <sign-input
             cls="check"
-            lb="checkedPwd"
+            label="checkedPwd"
             content="비밀번호 확인"
             pls="비밀번호 확인"
             nType="password"

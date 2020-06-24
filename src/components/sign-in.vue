@@ -37,7 +37,7 @@
         <div class="mb-4">
           <sign-input
             cls="mail-adress"
-            lb="email"
+            label="email"
             content="계정"
             pls="계정"
             @change="val => account = val"
@@ -48,7 +48,7 @@
         <div class="mb-10">
           <sign-input
             cls="pwd"
-            lb="password"
+            label="password"
             content="비밀번호"
             pls="비밀번호"
             nType="password"

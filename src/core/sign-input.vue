@@ -36,7 +36,7 @@
         type: String
       },
 
-      lb: {
+      label: {
         type: String
       },
 
