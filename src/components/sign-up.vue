@@ -21,114 +21,123 @@
 </style>
 
 <template>
-  <div class="sign-up">
+  <form action="#" @submit.prevent="onSubmit">
+    <div class="sign-up">
 
-    <div class="visual flex-1 relative mr-2">
-      <h1 class="absolute text-blue-primary text-large font-semibold z-10">회원 가입</h1>
-      <img 
-        class="w-full relative main-image" 
-        src="../assets/signup.jpg" 
-        alt=""
-      />
-    </div>
-    
-    <div class="sign flex-1" @keyup.enter="signUp">
-     
-      <h2 class="mb-6 text-large font-semibold">
-        본인의 정보를 작성해주세요
-      </h2>
-
-      <div class="mb-4 flex justify-between">
-        <sign-input
-          cls="last-name flex-1 mr-2"
-          lb="last_name"
-          content="성"
-          pls="성"
-          :err="inputErr"
-          @change="val => name.last = val"
-        >
-        </sign-input>
-
-        <sign-input
-          cls="first-name flex-1"
-          lb="first_name"
-          content="이름"
-          pls="이름"
-          :err="inputErr"
-          @change="val => name.first = val"
-        >
-        </sign-input>
-    
-      </div>
-
-      <div class="mb-4">
-
-        <sign-input
-          cls="mail-adress"
-          lb="email"
-          content="계정"
-          pls="example@gmail.com"
-          :err="inputErr"
-          @change="val => email = val"
-        >
-        </sign-input>
-
-      </div>
-
-      <div class="mb-4">
-        <sign-input
-          cls="pwd"
-          lb="password"
-          content="비밀번호"
-          pls="비밀번호"
-          nType="password"
-          :err="inputErr"
-          @change="val => password = val"
-        >
-        </sign-input>
-
-        <p class="text-grey-primary mb-4">문자, 숫자, 기호를 조합하여 8자 이상을 사용하세요</p>
-
-        <sign-input
-          cls="check"
-          lb="checkedPwd"
-          content="비밀번호 확인"
-          pls="비밀번호 확인"
-          nType="password"
-          :err="inputErr"
-          @change="val => checkPw = val"
-        >
-        </sign-input>
-
-        <!-- <input 
-          class="focus:outline-none focus:shadow-outline border-grey-300" 
-          type="text" 
-          placeholder="test"
-          v-bind:value="secret" 
-        /> -->
-
+      <div class="visual flex-1 relative mr-2">
+        <h1 class="absolute text-blue-primary text-large font-semibold z-10">회원 가입</h1>
+        <img 
+          class="w-full relative main-image" 
+          src="../assets/signup.jpg" 
+          alt=""
+        />
       </div>
       
+      <div class="sign flex-1" @keyup.enter="signUp" @keyup.esc="backHome2">
+      
+        <h2 class="mb-6 text-large font-semibold">
+          본인의 정보를 작성해주세요
+        </h2>
 
-      <div>
-        <button 
-          class="bg-blue-primary text-white py-1 px-4 rounded-lg shadow-md" 
-          type="button" 
-          @click="signUp"
-        >
-          확인
-        </button>
+        <div class="mb-4 flex justify-between">
+          <sign-input
+            cls="last-name flex-1 mr-2"
+            lb="last_name"
+            content="성"
+            pls="성"
+            :err="inputErr"
+            @change="val => name.last = val"
+          >
+          </sign-input>
 
-        <div>{{secret}}</div>
-        <div>{{check}}</div>
-        <div class="result mt-2" v-if="res.status">
-          <p>{{res.status}}</p>
+          <sign-input
+            cls="first-name flex-1"
+            lb="first_name"
+            content="이름"
+            pls="이름"
+            :err="inputErr"
+            @change="val => name.first = val"
+          >
+          </sign-input>
+      
         </div>
+
+        <div class="mb-4">
+
+          <sign-input
+            cls="mail-adress"
+            lb="email"
+            content="계정"
+            pls="example@gmail.com"
+            :err="inputErr"
+            :deepErr="emailErr"
+            @change="val => email = val"
+          >
+          </sign-input>
+
+        </div>
+
+        <div class="mb-4">
+          <sign-input
+            cls="pwd"
+            lb="password"
+            content="비밀번호"
+            pls="비밀번호"
+            nType="password"
+            :err="inputErr"
+            :deepErr="pwErr"
+            @change="val => password = val"
+          >
+          </sign-input>
+
+          <p class="text-grey-primary mb-4">문자, 숫자, 기호를 조합하여 8자 이상을 사용하세요</p>
+
+          <sign-input
+            cls="check"
+            lb="checkedPwd"
+            content="비밀번호 확인"
+            pls="비밀번호 확인"
+            nType="password"
+            :err="inputErr"
+            :deepErr="pwErr"
+            @change="val => checkPw = val"
+          >
+          </sign-input>
+
+        </div>
+        
+
+        <div>
+
+          <div class="flex justify-center">
+
+            <button 
+              class="bg-blue-primary hover:bg-transparent font-semibold text-white hover:text-blue-primary py-1 px-4 border hover:border-blue-primary shadow-md hover:shadow-none rounded-lg mr-6" 
+              type="button" 
+              @click="signUp"
+            >
+              확인
+            </button>
+
+            <router-link
+              class="bg-red-primary hover:bg-transparent font-semibold text-white hover:text-red-primary py-1 px-4 border hover:border-red-primary rounded-lg shadow-md hover:shadow-none" 
+              type="button" 
+              to="/"
+            >
+              취소
+            </router-link>
+          
+          </div>
+
+          <div class="result mt-2" v-if="error">
+            <p>{{errorMessage}}</p>
+          </div>
+        </div>
+
       </div>
 
     </div>
-
-  </div>
+  </form>
 </template>
 
 <script>
@@ -156,7 +165,12 @@
 
         check : "",
 
-        secret: ""
+        secret: "",
+
+        error: false,
+
+        pwErr   : false,
+        emailErr: false
 
       }
     },
@@ -166,24 +180,24 @@
     },
 
     watch: {
-     email : function () {
-       this.check = this.email
-     },
-     password : function () {
-       if(!this.password) return this.secret = ""
-       const data = [];
-       for(let i = 0; i < this.password.length; i++) {
-         data[i] = "*";
-       }
-       return this.secret = data.reduce((acc, cur)=> {
-         return acc + cur
-       })
+     res : function () {
+       if(this.res.status == "error") {
+         this.typeErrorCheck();
+         return this.error = true 
+       } 
+       router.push({path: '/signIn'});
      },
 
-     res : function () {
-       if(this.res.status == "error") return 
-       router.push({path: '/signIn'});
-     }
+      password: function () {
+        console.log(this.password);
+        this.pwErr = false;
+      },
+
+      email: function () {
+        console.log(this.email);
+        this.emailErr = false;
+      }
+
     },
 
     computed: {
@@ -193,17 +207,19 @@
         userInfo : "getUserInfo"
       }),
 
-      checking () {
-        const data = {
-          email : this.email,
-          password : this.password
+      errorMessage () {
+        switch (this.res.message) {
+          case "overlap" :
+            return "동일한 계정이 존재합니다."
+          case "pwTypeError" :
+            return "영문, 숫자, 특수문자를 포함한 8 ~ 16자리를 작성해주세요."
+          case "emailTypeError" :
+            return "이메일 형식에 맞지 않습니다."
+          default : 
+            return "알 수 없는 오류입니다."
         }
-        if(this.getLogin(data)) {
-          return "성공"
-        } else {
-          return "실패"
-        }
-     }
+      },
+
     },  
 
     methods: {
@@ -242,7 +258,25 @@
 
       backHome () {
          if(this.userInfo.type) router.push({path: '/'});
-      }
+      },
+
+      backHome2 () {
+        router.push({path: '/'});
+      },
+
+      typeErrorCheck () {
+        switch (this.res.message) {
+          case "pwTypeError" :
+            this.pwErr = true;
+            break;
+          case "emailTypeError" :
+            this.emailErr = true;
+            break;
+          case "overlap" :
+            this.emailErr = true;
+            break;
+        }
+      },
 
     },
 

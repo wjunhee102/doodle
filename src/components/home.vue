@@ -3,8 +3,8 @@
 </style>
 
 <template>
-  <div>
-    <h1>안녕</h1>
+  <div class="inner text-center">
+    <h1 class="text-ultra">안녕</h1>
   </div>
 </template>
 

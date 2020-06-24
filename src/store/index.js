@@ -9,10 +9,9 @@ const ADDCOUNT     = "ADDLIST";
 
 // 회원가입
 const SIGNUP       = "SIGNUP";
-const SIGNUPSUCESS = "SIGNUPSUCESS";
+const SIGNRESADD = "SIGNRESADD";
 
 // 로그인
-const LOGINRESULT    = "LOGINRESULT";
 const LOGOUT         = "LOGOUT";
 const USERINFORESET  = "USERINFORESET";
 const CURRENTUSERSAVE = "CURRENTUSERSAVE";
@@ -90,12 +89,12 @@ const store = new Vuex.Store({
       state.account = payload
     },
     
-    [SIGNUPSUCESS] : function (state, payload) {
+    [SIGNRESADD] : function (state, payload) {
       state.signRes = payload
     },
 
     [LOGOUT] : function (state) {
-      return state.currentUser = {
+      state.currentUser = {
         type : false,
         email: "",
         name : {
@@ -128,27 +127,10 @@ const store = new Vuex.Store({
       }
     },
 
-    [LOGINRESULT] : function (state, payload) {
-      const data = () => {
-        switch(payload.status) {
-          case "sucess" :
-            return `${payload.message}님 환영합니다!`
-          case "error":
-            return "계정을 찾을 수 없습니다."
-          default :
-            return "알 수 없는 오류입니다."
-        }
-      }
-
-      state.signRes = {
-        status : payload.status,
-        message: data()
-      };
-    }
-
   },
 
   actions: {
+    
     async accountSave ({commit}, payload) {
       try {
         const data = await fetch("http://localhost:8085/sign-up", {
@@ -162,16 +144,13 @@ const store = new Vuex.Store({
 
         console.log(data);
 
-        if(!data) {
-          commit(SIGNUPSUCESS, {
-            status : "error",
-            message : "aa"
-          })
-        } else {
-          commit(SIGNUPSUCESS, data);
-        }
+        commit(SIGNRESADD, data);
         
       } catch (err) {
+        commit(SIGNRESADD, {
+          status : "error",
+          message : "aa"
+        })
         console.log(err);
       } 
     },
@@ -191,7 +170,7 @@ const store = new Vuex.Store({
 
         if(!data.email) {
           commit(USERINFORESET);
-          commit(SIGNUPSUCESS, data);
+          commit(SIGNRESADD, data);
         } else {
           commit(RESRESET);
           commit(CURRENTUSERSAVE, data);

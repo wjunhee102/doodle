@@ -54,7 +54,13 @@
       },
 
       err: {
-        type: Boolean
+        type: Boolean,
+        default: false
+      },
+
+      deepErr: {
+        type: Boolean,
+        default: false
       }
 
     },
@@ -101,7 +107,7 @@
       // },
 
       inputError () {
-        if(this.err && !this.val) {
+        if(this.err && !this.val || this.deepErr) {
           this.errCode = true
           return "border-red-primary"
         }

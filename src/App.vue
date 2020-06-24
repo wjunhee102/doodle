@@ -12,6 +12,30 @@
   #app {
     width: 100%;
     height: 100vh;
+
+    .inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    button {
+      outline: none;
+    }
+
+    .header {
+      border-bottom: 1px solid #ccc;
+      @apply w-full shadow-sm;
+
+      .userInfo {
+        min-width: 50px;
+        @apply w-1/6 relative;
+
+        .user {
+          line-height: inherit;
+          @apply ;
+        }
+      }
+    }
   }
 
 </style>
@@ -19,12 +43,14 @@
 <template>
   <div id="app">
     <div>
-      <div class="flex justify-between">
-        <gnb></gnb>
-        <div v-if="userInfo.type">
-          {{userInfo.name.first}}
+      <div class="header">
+
+        <div class="inner">
+          
+          <gnb></gnb>
+
         </div>
-        <button v-if="userInfo.type" @click="logout">logout</button>
+       
       </div>
       
       <router-view></router-view>
@@ -36,23 +62,8 @@
 <script>
   import Nav from './components/nav';
 
-  import { mapGetters, mapMutations } from 'vuex';
-
   export default {
     name: 'App',
-
-    computed: {
-      ...mapGetters({
-        getItem: 'getItem',
-        userInfo: 'getUserInfo'
-      })
-    },
-
-    methods: {
-      ...mapMutations({
-          logout : "LOGOUT"
-      })
-    },
 
     components: {
       "gnb" : Nav
