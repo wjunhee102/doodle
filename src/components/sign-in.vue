@@ -34,6 +34,10 @@
 
       <div class="flex-1 relative" @keyup.enter="login" @keyup.esc="backHome">
 
+        <h2 class="mb-6 text-large font-semibold">
+          계정과 비밀번호를 작성해주세요.
+        </h2>
+
         <div class="mb-4">
           <sign-input
             cls="mail-adress"
