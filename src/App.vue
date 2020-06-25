@@ -1,7 +1,7 @@
 <style lang="scss">
   @import "css/tailwind.css";
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
-
+  
   body { 
     width: 100%;
     height: 100%;
@@ -13,6 +13,9 @@
     width: 100%;
     height: 100vh;
 
+    background-image: url("./assets/main_bg_wide.jpg");
+    background-position: center;
+
     .inner {
       max-width: 1080px;
       margin: 0 auto;
@@ -23,6 +26,7 @@
     }
 
     .header {
+      background-color: rgba(255, 255, 255, 0.5);
       border-bottom: 1px solid #ccc;
       @apply w-full shadow-sm;
 

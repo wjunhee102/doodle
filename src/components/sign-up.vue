@@ -6,7 +6,7 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    @apply .flex .justify-between .flex-wrap .border .absolute .py-16 .px-10 .rounded-lg .shadow;
+    @apply bg-white .flex .justify-between .flex-wrap .border .absolute .py-16 .px-10 .rounded-lg .shadow;
     
     .visual {
 

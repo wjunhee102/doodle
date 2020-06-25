@@ -1,6 +1,10 @@
 <style lang="scss">
   .gnb {
     text-align: center;
+    background-color: rgba(255, 255, 255,0);
+    div {
+      background-color: rgba(255, 255, 255,0);
+    }
     a {
       width: 100px;
       margin-right: 10px;
@@ -12,21 +16,24 @@
 <template>
   <div class="gnb flex justify-between flex-auto">
 
-    <div class="gnb flex justify-between flex-auto">
+    <div class="flex justify-between flex-auto">
       <router-link to="/">홈</router-link>
-      <router-link to="/signUp">회원가입</router-link>
-      <router-link to="/signIn">로그인</router-link>
     </div>
 
     <div>
-      <div class="userInfo flex justify-between">
+      
+      <div v-if="!userInfo.type">
+        <router-link to="/signUp">회원가입</router-link>
+        <router-link to="/signIn">로그인</router-link>
+      </div>
+      
+      <div class="userInfo flex justify-between" v-if="userInfo.type">
         <div 
-          v-if="userInfo.type"
           class="user text-center text-large font-semibold"
         >
           {{userInfo.name.first}}
         </div>
-        <button class="border-grey-dim text-large font-semibold" v-if="userInfo.type" @click="logout">Logout</button>
+        <button class="border-grey-dim text-large font-semibold" @click="logout">Logout</button>
       </div>
     </div>
 
