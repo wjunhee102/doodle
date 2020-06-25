@@ -29,16 +29,6 @@
       background-color: rgba(255, 255, 255, 0.5);
       border-bottom: 1px solid #ccc;
       @apply w-full shadow-sm;
-
-      .userInfo {
-        min-width: 50px;
-        @apply w-1/6 relative;
-
-        .user {
-          line-height: inherit;
-          @apply ;
-        }
-      }
     }
   }
 

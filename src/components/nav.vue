@@ -6,7 +6,7 @@
       background-color: rgba(255, 255, 255,0);
     }
     a {
-      width: 100px;
+      width: 100px; 
       margin-right: 10px;
       @apply text-large font-semibold leading-loose;
     }
@@ -20,20 +20,20 @@
       <router-link to="/">홈</router-link>
     </div>
 
-    <div>
+    <div class="w-1/5">
       
       <div v-if="!userInfo.type">
         <router-link to="/signUp">회원가입</router-link>
         <router-link to="/signIn">로그인</router-link>
       </div>
       
-      <div class="userInfo flex justify-between" v-if="userInfo.type">
+      <div class="userInfo flex justify-between w-full" v-if="userInfo.type">
         <div 
-          class="user text-center text-large font-semibold"
+          class="user text-center text-large font-semibold flex-1"
         >
           {{userInfo.name.first}}
         </div>
-        <button class="border-grey-dim text-large font-semibold" @click="logout">Logout</button>
+        <button class="border-grey-dim text-large font-semibold flex-1" @click="logout">Logout</button>
       </div>
     </div>
 
