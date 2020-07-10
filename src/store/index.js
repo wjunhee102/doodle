@@ -4,6 +4,8 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
+const URL = "http://34.64.205.195:8085"
+
 //*/ mutation-types
 const ADDCOUNT     = "ADDLIST";
 
@@ -133,7 +135,7 @@ const store = new Vuex.Store({
     
     async accountSave ({commit}, payload) {
       try {
-        const data = await fetch("http://localhost:8085/sign-up", {
+        const data = await fetch(`${URL}/sign-up`, {
           method: 'POST',
           mode: "cors",
           body: JSON.stringify(payload),
@@ -157,7 +159,7 @@ const store = new Vuex.Store({
 
     async loginAction ({commit}, payload) {
       try {
-        const data = await fetch("http://localhost:8085/sign-in", {
+        const data = await fetch(`${URL}/sign-in`, {
           method: 'POST',
           mode: "cors",
           body: JSON.stringify(payload),
