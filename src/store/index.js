@@ -4,7 +4,8 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-const URL = "http://34.64.205.195:8085"
+const URL = "http://34.64.240.133:8085";
+// const LOCAL_URL = "http://localhost:8085";
 
 //*/ mutation-types
 const ADDCOUNT     = "ADDLIST";
