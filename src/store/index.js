@@ -9,11 +9,11 @@ const ADDCOUNT     = "ADDLIST";
 
 // 회원가입
 const SIGNUP       = "SIGNUP";
-const SIGNRESADD = "SIGNRESADD";
+const SIGNRESADD   = "SIGNRESADD";
 
 // 로그인
-const LOGOUT         = "LOGOUT";
-const USERINFORESET  = "USERINFORESET";
+const LOGOUT          = "LOGOUT";
+const USERINFORESET   = "USERINFORESET";
 const CURRENTUSERSAVE = "CURRENTUSERSAVE";
 
 // 회원가입, 로그인 결과값 초기화
